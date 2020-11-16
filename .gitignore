@@ -20,15 +20,10 @@
 .libs
 .project
 .pydevproject
-aclocal.m4
 autom4te.cache
-compile
-depcomp
 INSTALL
-gtk-doc.make
 libtool
 Makefile
-missing
 stamp*
 *.stamp
 .settings
@@ -36,7 +31,6 @@ stamp*
 .cproject
 
 /build/coverage*
-/build/m4/*
 !/build/m4/vapigen.m4
 /build/valgrind-suppressions
 /build/test-driver
