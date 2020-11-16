@@ -23,17 +23,11 @@
 aclocal.m4
 autom4te.cache
 compile
-configure
-config.*
 depcomp
-install-sh
 INSTALL
 gtk-doc.make
 libtool
-ltmain.sh
 Makefile
-Makefile.in
-Makefile.in.in
 missing
 stamp*
 *.stamp
@@ -46,7 +40,6 @@ stamp*
 !/build/m4/vapigen.m4
 /build/valgrind-suppressions
 /build/test-driver
-/build/litter
 
 /docs/man/secret-tool.1
 /docs/reference/libsecret/version.xml
