@@ -1,13 +1,11 @@
-AC_PREREQ(2.63)
+AC_PREREQ([2.69])
 
 m4_define([libsecret_major_version], 0)
 m4_define([libsecret_minor_version], 20)
 m4_define([libsecret_micro_version], 4)
 m4_define([libsecret_version],
           [libsecret_major_version.libsecret_minor_version.libsecret_micro_version])
-AC_INIT([libsecret],[libsecret_version],
-        [https://gitlab.gnome.org/GNOME/libsecret/issues/],
-        [libsecret])
+AC_INIT([libsecret],[libsecret_version],[https://gitlab.gnome.org/GNOME/libsecret/issues/],[libsecret])
 
 AC_SUBST(SECRET_MAJOR_VERSION, libsecret_major_version)
 AC_SUBST(SECRET_MINOR_VERSION, libsecret_minor_version)
@@ -64,8 +62,8 @@ AM_MAINTAINER_MODE([enable])
 # -----------------------------------------------------------------------------
 # Basic tools
 
-AC_GNU_SOURCE
-AC_ISC_POSIX
+AC_USE_SYSTEM_EXTENSIONS
+AC_SEARCH_LIBS([strerror],[cposix])
 AC_PROG_CC
 AC_PROG_CPP
 AM_PROG_CC_C_O
@@ -80,9 +78,9 @@ PKG_PROG_PKG_CONFIG
 
 AM_GNU_GETTEXT([external])
 # FIXME: Remove AM_GNU_GETTEXT_VERSION once autoreconf supports REQUIRE_VERSION
-AM_GNU_GETTEXT_VERSION([0.19.8])
+AM_GNU_GETTEXT_VERSION([0.20.0])
 m4_ifdef([AM_GNU_GETTEXT_REQUIRE_VERSION],[
-AM_GNU_GETTEXT_REQUIRE_VERSION([0.19.8])
+AM_GNU_GETTEXT_REQUIRE_VERSION([0.20.0])
 ])
 
 GETTEXT_PACKAGE=libsecret
@@ -113,7 +111,7 @@ AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 # Manual pages
 
 AC_ARG_ENABLE(manpages,
-              AC_HELP_STRING([--disable-manpages], [Build manual pages]))
+              AS_HELP_STRING([--disable-manpages],[Build manual pages]))
 if test "$enable_manpages" != "no"; then
 	enable_manpages="yes"
 	AC_PATH_PROG([XSLTPROC], [xsltproc])
@@ -139,8 +137,7 @@ AM_CONDITIONAL(HAVE_VALAC, test "x$VALAC" != "x")
 GCRYPT_LIBVER=1
 
 AC_ARG_ENABLE(gcrypt,
-              [AC_HELP_STRING([--disable-gcrypt],
-                              [without gcrypt and transport encryption])
+              [AS_HELP_STRING([--disable-gcrypt],[without gcrypt and transport encryption])
               ])
 
 if test "$enable_gcrypt" != "no"; then
@@ -220,8 +217,7 @@ AC_SUBST(TEST_MODE)
 
 AC_MSG_CHECKING([for debug mode])
 AC_ARG_ENABLE(debug,
-              AC_HELP_STRING([--enable-debug=no/default/yes],
-                             [Turn on or off debugging])
+              AS_HELP_STRING([--enable-debug=no/default/yes],[Turn on or off debugging])
              )
 
 if test "$enable_debug" != "no"; then
