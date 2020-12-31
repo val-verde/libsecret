@@ -265,11 +265,17 @@ read_password_stdin (void)
 static SecretValue *
 read_password_tty (void)
 {
-	gchar *password;
+#if defined(__ANDROID__)
+        gchar password[1024];
 
-	password = getpass ("Password: ");
-	return secret_value_new_full (password, -1, "text/plain",
-	                              (GDestroyNotify)secret_password_wipe);
+        fgets(password, sizeof(password), stdin);
+#else
+        gchar *password;
+
+        password = getpass ("Password: ");
+#endif
+        return secret_value_new_full (password, -1, "text/plain",
+                                      (GDestroyNotify)secret_password_wipe);
 }
 
 static int
